@@ -3,7 +3,7 @@ import { compile } from 'ripple/compiler';
 import { promises as fs } from '@zenfs/core';
 import path from 'pathe';
 
-export function ripple(inlineOptions = {}): Partial<Plugin> {
+export function ripple(inlineOptions = {}): Plugin {
 	const api = {};
 
 	const plugins = [
@@ -21,7 +21,6 @@ export function ripple(inlineOptions = {}): Partial<Plugin> {
 
 					if (css !== '') {
 						const cssId = [`${id}?ripple`, 'type=style', 'lang.css'].join('&');
-						// const cssId = `${id}-style.css`;
 						await fs.mkdir(path.dirname(cssId), { recursive: true, })
 						await fs.writeFile(cssId, css);
 

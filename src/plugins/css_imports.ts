@@ -5,7 +5,7 @@ import { promises as fs } from '@zenfs/core';
  * A Rollup plugin to import CSS files.
  * @returns {import('rollup').Plugin} The plugin object.
  */
-export default function cssImport(): Partial<Plugin> {
+export default function cssImport(): Plugin {
   return {
     name: 'css-import',
     /**

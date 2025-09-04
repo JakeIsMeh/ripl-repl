@@ -9,14 +9,14 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@oxc-transform/binding-wasm32-wasi": "^0.86.0",
     "@rollup/browser": "^4.50.0",
     "@rollup/plugin-inject": "^5.0.5",
+    "@rollup/plugin-sucrase": "^5.0.2",
     "@rollup/pluginutils": "^5.2.0",
     "@unocss/preset-wind4": "^66.5.0",
+    "@vitejs/plugin-basic-ssl": "^2.1.0",
     "@zenfs/core": "^2.4.0",
     "buffer": "^6.0.3",
-    "oxc-transform": "^0.86.0",
     "pathe": "^2.0.3",
     "ripple": "^0.2.13",
     "unenv": "2.0.0-rc.20",
