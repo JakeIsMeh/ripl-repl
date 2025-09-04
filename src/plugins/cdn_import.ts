@@ -1,5 +1,5 @@
 /**
- * Taken from preact-www
+ * Taken from preact-www (Thanks!)
  */
 
 import type { Plugin } from "@rollup/browser";
@@ -15,7 +15,6 @@ export default function cdnImport(): Plugin {
 			// Resolve absolute path ids relative to their importer. For example,
 			// esm.sh will return this internally. `https://esm.sh/preact` returns
 			// `exports * from "/stable/preact@10.18.0/es2022/preact.mjs"`
-
 			if (id[0] === '/') {
 				if (!importer!.match(/^https?:/)) {
 					throw new Error(`Cannot resolve ${id} from ${importer}`);
@@ -24,6 +23,7 @@ export default function cdnImport(): Plugin {
 				try {
 					return new URL(id, importer).href;
 				} catch (e) { }
+
 			}
 
 			// If id is already an esm.sh url, add `?external=*` to it and return
@@ -47,7 +47,7 @@ export default function cdnImport(): Plugin {
 		},
 		async load(id) {
 			if (fs.existsSync(id)) {
-				return null
+				return null // let the fs handle it
 			}
 			return get(id)
 		}

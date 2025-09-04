@@ -3,7 +3,7 @@ import { compile } from 'ripple/compiler';
 import { promises as fs } from '@zenfs/core';
 import path from 'pathe';
 
-export function ripple(inlineOptions = {}): Plugin {
+export function ripple(inlineOptions = {}): Plugin[] {
 	const api = {};
 
 	const plugins = [

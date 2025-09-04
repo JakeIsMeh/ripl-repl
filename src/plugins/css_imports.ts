@@ -13,14 +13,24 @@ export default function cssImport(): Plugin {
      * @param {string} id The id of the module to load.
      */
     async load(id) {
+      let url;
+      try {
+        url = new URL(id);
+      } catch (_) {
+      }
       // We only care about files ending with .css
-      if (!id.endsWith('.css')) {
-        return null; // Return null to let other plugins or Rollup handle it.
+      if (!id.endsWith('.css') && !url?.pathname.endsWith('.css')) {
+        return null;
       }
 
       try {
         // Read the content of the CSS file.
-        const cssContent = await fs.readFile(id, 'utf-8');
+        let cssContent;
+        if (!url) {
+          cssContent = await fs.readFile(id, 'utf-8');
+        } else {
+          cssContent = await (await fetch(url)).text()
+        }
 
         // Escape backticks, backslashes, and newlines to safely use it in a template literal.
         const escapedCss = cssContent
@@ -39,8 +49,6 @@ export default function cssImport(): Plugin {
   }
 })();
         `;
-
-        // Return the generated JavaScript code. Rollup will process this.
         return {
           code: code,
           map: { mappings: '' } // We don't need a source map for this.
@@ -53,4 +61,3 @@ export default function cssImport(): Plugin {
     }
   };
 }
-

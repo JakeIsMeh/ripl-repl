@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import { defineEnv } from "unenv";
 import inject from '@rollup/plugin-inject';
 import basicSsl from '@vitejs/plugin-basic-ssl'
+import ripple from 'vite-plugin-ripple';
 
 const { env } = defineEnv({
   nodeCompat: true,
@@ -23,6 +24,7 @@ export default defineConfig({
     UnoCSS(),
     inject(env.inject),
     basicSsl(),
+    ripple(),
   ],
   resolve: {
     alias: {
@@ -33,6 +35,6 @@ export default defineConfig({
     external: [...env.external],
   },
   optimizeDeps: {
-    exclude: ['@rollup/browser']
+    exclude: ['@rollup/browser', 'oxc-transform', '@oxc-resolver/binding-wasm32-wasi']
   },
 })
