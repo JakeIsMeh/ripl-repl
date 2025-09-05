@@ -1,37 +1,23 @@
-import * as monaco from 'monaco-editor';
+import { init_monaco } from './monaco'
 
-self.MonacoEnvironment = {
-	getWorker: function (workerId, label) {
-		const getWorkerModule = (moduleUrl, label) => {
-			return new Worker(self.MonacoEnvironment.getWorkerUrl(moduleUrl), {
-				name: label,
-				type: 'module'
-			});
-		};
+import {effect} from 'ripple'
 
-		switch (label) {
-			case 'json':
-				return getWorkerModule('/monaco-editor/esm/vs/language/json/json.worker?worker', label);
-			case 'css':
-			case 'scss':
-			case 'less':
-				return getWorkerModule('/monaco-editor/esm/vs/language/css/css.worker?worker', label);
-			case 'html':
-				return getWorkerModule('/monaco-editor/esm/vs/language/html/html.worker?worker', label);
-			case 'typescript':
-			case 'javascript':
-				return getWorkerModule('/monaco-editor/esm/vs/language/typescript/ts.worker?worker', label);
-			default:
-				return getWorkerModule('/monaco-editor/esm/vs/editor/editor.worker?worker', label);
+export component App() {
+	let editor;
+
+	try { editor = await init_monaco() } async {}
+	effect(async () => {
+		return () => { editor.dispose() }
+	})
+
+	<div id="editor" class="w-100vw h-100vh border-0" />
+
+	// <iframe id="sandbox" class="w-100vw h-100vh border-0" sandbox="allow-scripts allow-forms allow-modals" />
+
+	<style>
+		#editor {
+			min-width: 100vw;
+			min-height: 100vh;
 		}
-	}
-};
-
-monaco.editor.create(document.getElementById('container'), {
-	value: "function hello() {\n\talert('Hello world!');\n}",
-	language: 'javascript'
-});
-
-export default component App() {
-	<div id="editor" />
+	</style>
 }

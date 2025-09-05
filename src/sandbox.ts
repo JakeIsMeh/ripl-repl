@@ -1,5 +1,4 @@
 
-import 'virtual:uno.css'
 import { rollup } from '@rollup/browser';
 import { configureSingle, promises as fs, InMemory } from '@zenfs/core';
 import path from 'pathe';

@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import { defineEnv } from "unenv";
 import inject from '@rollup/plugin-inject';
 import basicSsl from '@vitejs/plugin-basic-ssl'
-import ripple from 'vite-plugin-ripple';
+import {ripple} from 'vite-plugin-ripple';
 
 const { env } = defineEnv({
   nodeCompat: true,
