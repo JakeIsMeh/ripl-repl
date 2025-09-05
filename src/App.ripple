@@ -10,14 +10,18 @@ export component App() {
 		return () => { editor.dispose() }
 	})
 
-	<div id="editor" class="w-100vw h-100vh border-0" />
-
-	// <iframe id="sandbox" class="w-100vw h-100vh border-0" sandbox="allow-scripts allow-forms allow-modals" />
+	<div class="d-flex">
+		<div id="editor" class="pane"/>
+		<iframe id="sandbox" class="pane" sandbox="allow-scripts allow-forms allow-modals" />
+	</div>
 
 	<style>
-		#editor {
-			min-width: 100vw;
-			min-height: 100vh;
+		.pane {
+			width: 50vw;
+			height: 100vh;
+		}
+		.d-flex {
+			display:flex;
 		}
 	</style>
 }
